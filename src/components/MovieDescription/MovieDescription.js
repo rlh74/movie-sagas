@@ -21,7 +21,8 @@ class MovieDescription extends Component {
      <button onClick={this.routeToHome}>Back To List</button>{this.props.reduxState.description ? <button onClick={(event) => this.routeToEdit(event, this.props.reduxState.movies[this.props.reduxState.description - 1].id)}>Edit</button> : ''}
      <h2>Movie Description</h2>
      <div className="movie-description">
-        <p>{this.props.reduxState.description ? this.props.reduxState.movies[this.props.reduxState.description - 1].description : ''} </p>
+       
+        <>{this.props.reduxState.description ? <><h2>{this.props.reduxState.movies[this.props.reduxState.description - 1].title}</h2>{this.props.reduxState.movies[this.props.reduxState.description - 1].description}</> : ''} </>
       </div>
       {/* <p>try this :D {this.props.reduxState.description ? JSON.stringify(this.props.reduxState.movies[this.props.reduxState.description - 1].description) : 'no' }</p> */}
      </>

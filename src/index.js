@@ -14,6 +14,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('ADD_MOVIES', addMovies);
+    yield takeEvery('ADD_NEW_DESCRIPTION', addDescription);
 }
 
 // Create sagaMiddleware
@@ -31,6 +32,16 @@ function* addMovies(action) {
     }
 }
 
+function* addDescription(action){
+    yield console.log('add description saga:', action.payload);
+    try {
+        yield axios.put('/movies', action.payload);
+    } catch (error) {
+        console.log('error with addDescription reducer', error);
+    }
+}
+
+
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
@@ -44,24 +55,26 @@ const movies = (state = [], action) => {
 }
 // used to store description id
 const description = (state = '', action) => {
-    // switch (action.type) {
-    //     case 'FETCH_ID':
-    //         console.log('case FETCH_ID:', action.payload)
-    //         return action.payload;
-    //     default:
-    //         state = null;
-    //         console.log('default case in description reducer', action.payload)
-    //         return state;
-    // }
     if (action.type === 'FETCH_ID'){
         console.log('satisfied if condition in description reducer with id:', action.payload)
         return action.payload;
     } else {
-        action.payload = null;
+        // action.payload = null;
         console.log('else performed in description reducer', action.payload)
         return state;
     }
 }
+// reducer to axios put new description data to database
+// const updateDescription = (state = [], action) => {
+//     if (action.type === 'ADD_NEW_DESCRIPTION'){
+//         console.log('setting description with:', action.payload)
+//         return state;
+//     } else {
+//         console.log('else performed in updateDescription reducer', action.payload)
+//         return state;
+//     }
+// }
+
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -77,7 +90,8 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        description
+        description,
+        // updateDescription
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
