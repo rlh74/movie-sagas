@@ -12,7 +12,7 @@ class MovieList extends Component {
     id = Number(id);
     console.log('movieItem click handler id is:', id);
     this.props.dispatch({type: "FETCH_ID", payload: id})
-    this.props.history.push(`details/${id}`);
+    this.props.history.push(`details/`);
   }
   // Renders the entire app on the DOM
   render() {

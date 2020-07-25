@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 class MovieDescription extends Component {
-  // state = {
-  //   description: ''
-  // }
-  componentDidMount(){
-    // console.log('MovieDescription mounted', this.props.reduxState.movies);
-    // this.props.dispatch({type: "ADD_MOVIES"})
-    // console.log('DESCRIPTION: redux state props are', this.props.reduxState.movies)
-    
+
+  routeToHome = (event) => {
+    event.preventDefault();
+    console.log('router OK');
+    this.props.history.push('/');
+  }
+
+  routeToEdit = (event, id) => {
+    event.preventDefault();
+    console.log('id to edit:', id)
+    this.props.history.push('edit')
   }
 
   render() {
     return (
      <>
+     <button onClick={this.routeToHome}>Back To List</button>{this.props.reduxState.description ? <button onClick={(event) => this.routeToEdit(event, this.props.reduxState.movies[this.props.reduxState.description - 1].id)}>Edit</button> : ''}
      <h2>Movie Description</h2>
      <div className="movie-description">
         <p>{this.props.reduxState.description ? this.props.reduxState.movies[this.props.reduxState.description - 1].description : ''} </p>
