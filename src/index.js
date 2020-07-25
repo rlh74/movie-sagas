@@ -13,14 +13,14 @@ import {takeEvery, put} from 'redux-saga/effects';
 import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('MOUNT_MOVIES', mountMovies);
+    yield takeEvery('ADD_MOVIES', addMovies);
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
 // use FETCH_IMAGE action to get movies from database
-function* mountMovies(action) {
+function* addMovies(action) {
     try {
         // yield console.log('attempting get');
         const response = yield axios.get('/movies');
@@ -38,19 +38,28 @@ const movies = (state = [], action) => {
             console.log('case SET_MOVIES:', action.payload)
             return action.payload;
         default:
-            console.log('default case in movies reducer', action.payload)
+            console.log('default case in movies reducer', state)
             return state;
     }
 }
 // used to store description id
-const description = (state = [], action) => {
-    switch (action.type) {
-        case 'FETCH_ID':
-            console.log('case FETCH_ID:', action.payload)
-            return action.payload;
-        default:
-            console.log('default case in description reducer', action.payload)
-            return state;
+const description = (state = '', action) => {
+    // switch (action.type) {
+    //     case 'FETCH_ID':
+    //         console.log('case FETCH_ID:', action.payload)
+    //         return action.payload;
+    //     default:
+    //         state = null;
+    //         console.log('default case in description reducer', action.payload)
+    //         return state;
+    // }
+    if (action.type === 'FETCH_ID'){
+        console.log('satisfied if condition in description reducer with id:', action.payload)
+        return action.payload;
+    } else {
+        action.payload = null;
+        console.log('else performed in description reducer', action.payload)
+        return state;
     }
 }
 // Used to store the movie genres

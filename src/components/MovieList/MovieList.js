@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 class MovieList extends Component {
   componentDidMount(){
     console.log('MovieList mounted');
-    this.props.dispatch({type: "MOUNT_MOVIES"})
+    this.props.dispatch({type: "ADD_MOVIES"})
   }
 
   handleClick = (event, id) => {
