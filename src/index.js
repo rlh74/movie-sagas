@@ -42,7 +42,17 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-
+// used to store description id
+const description = (state = [], action) => {
+    switch (action.type) {
+        case 'FETCH_ID':
+            console.log('case FETCH_ID:', action.payload)
+            return action.payload;
+        default:
+            console.log('default case in description reducer', action.payload)
+            return state;
+    }
+}
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -58,6 +68,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        description
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
