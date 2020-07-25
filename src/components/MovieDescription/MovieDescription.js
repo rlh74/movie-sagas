@@ -12,7 +12,7 @@ class MovieDescription extends Component {
   routeToEdit = (event, id) => {
     event.preventDefault();
     console.log('id to edit:', id)
-    this.props.history.push('edit')
+    this.props.history.replace('edit')
   }
 
   render() {

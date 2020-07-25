@@ -11,10 +11,10 @@
 
 ## functionality 
 [x] - get list of movies to display
-[] - click movie -> show details for movie (on separate route)
+[x] - click movie -> show details for movie (on separate route)
 [] - if genres added, have them show up on details
-[] - detail route has back to list button and edit button
-[] - click edit button to direct to edit route
+[x] - detail route has back to list button and edit button
+[x] - click edit button to direct to edit route
 [] - edit route has cancel and save button
 [] - cancel button removes text input and redirects to details
 [] - save UPDATES database entries. displays on edit page
