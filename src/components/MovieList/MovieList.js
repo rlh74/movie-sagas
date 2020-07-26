@@ -23,7 +23,9 @@ class MovieList extends Component {
           return (
             <div className="movie-poster" key={index}>
             <img src={item.poster} alt="movies" onClick={ (event) => this.handleClick(event, item.id) }/>
+            <div className="movie-description" key={index}>
             <p>{item.description}</p>
+            </div>
            </div>
           )
         })}

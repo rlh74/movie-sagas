@@ -44,18 +44,16 @@ class MovieDescription extends Component {
   render() {
     return (
      <>
-     <button onClick={this.routeToHome}>Back To List</button>{this.props.reduxState.description ? <button onClick={(event) => this.routeToEdit(event, this.props.reduxState.movies[this.props.reduxState.description - 1].id)}>Edit</button> : ''}
-     <h2>Movie Description</h2>
-     {JSON.stringify(this.props.reduxState.genres.name)}
-     <div className="movie-description">
+     <div className="movie-details">
        {/* RENDERS MOVIE DESCRIPTION */}
-        <>{this.props.reduxState.description ? <><h2>{this.props.reduxState.movies[this.props.reduxState.description - 1].title}</h2>{this.props.reduxState.movies[this.props.reduxState.description - 1].description}</> : ''} </>
+        <>{this.props.reduxState.description ? <><h1>{this.props.reduxState.movies[this.props.reduxState.description - 1].title}</h1><p>{this.props.reduxState.movies[this.props.reduxState.description - 1].description}</p></> : ''} </>
         {/* RENDERS MOVIE GENRES */}
         {this.state.genres.map((item, index)=>{
           return (
             <li key={index}>{item}</li>
-          )
-        })}
+            )
+          })}
+          <button onClick={this.routeToHome}>Back To List</button>{this.props.reduxState.description ? <button onClick={(event) => this.routeToEdit(event, this.props.reduxState.movies[this.props.reduxState.description - 1].id)}>Edit</button> : ''}
       </div>
      </>
     );

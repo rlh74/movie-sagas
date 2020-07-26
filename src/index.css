@@ -4,5 +4,65 @@ body {
   font-family: sans-serif;
 }
 
+.movie-poster {
+  display: flex;
+  padding: 2%;
+}
 
+.movie-poster img {
+  width: auto;
+}
+
+.movie-poster p {
+  text-align: left;
+  margin: 10px;
+  padding-right: 50%;
+}
+
+.movie-details {
+  margin-top: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+  background-color: rgb(47, 101, 201);
+  padding: 20px;
+}
+
+.movie-details li {
+  list-style: square;
+  color: blanchedalmond;
+}
+
+.movie-details p {
+  color: beige;
+  
+}
+
+.movie-description {
+  background-size: auto;
+}
+
+h1 {
+  background-color: rgb(26, 26, 167);
+  color: rgba(255, 241, 217, 0.893);
+  text-align: center;
+}
+
+.edit-movie {
+  margin-top: 5%;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+  background-color: rgb(26, 26, 167);
+}
+
+.edit-movie h2 {
+  color: beige;
+  text-align: center;
+}
+
+.edit-movie textarea {
+  margin-left: 25%;
+  margin-right: 25%;
+}
 

@@ -1,22 +1,45 @@
+-- run these queries to set up database
 CREATE TABLE "movies" (
   "id" SERIAL PRIMARY KEY,
   "title" VARCHAR(120) NOT NULL,
   "poster"  VARCHAR(120) NOT NULL,
   "description" TEXT NOT NULL
 );
-
+ 
 -- movies can have multiple genres
 CREATE TABLE "genres" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(80) NOT NULL
 );
 
+-- query for get
+-- SELECT * FROM movies ORDER BY id ASC;
+-- query for viewing full table
+-- SELECT * FROM movies
+-- JOIN movie_genre_junction on movie_genre_junction.movie_id = movies.id
+-- JOIN genres on genres.id = movie_genre_junction.genre_id;
 
--- CREATE JUNCTION TABLE
--- You will need to create the junction table that stores the relationships between "movies" and "genres"
--- This table will need to be populated with some data as well (INSERTS)
--- Recall that this Junction Table will just be a table of ids!
 
+--query used for adding new genre 
+--WITH ins1 AS (
+--	insert into genres("name")
+--	values ('eggsalad')
+--	RETURNING id
+--) 
+--insert into movie_genre_junction (movie_id, genre_id) values
+--(3, (select id from ins1));
+
+
+-- creates junction table
+CREATE TABLE movie_genre_junction (
+	movie_id int,
+	genre_id int,
+	CONSTRAINT movie_cat_pk PRIMARY KEY (movie_id, genre_id),
+	CONSTRAINT FK_movies
+		FOREIGN KEY (movie_id) REFERENCES movies (id),
+	CONSTRAINT FK_genre
+		FOREIGN KEY (genre_id) REFERENCES genres (id)
+);
 
 
 --------[ DATA! ]---------
@@ -55,3 +78,45 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+-- starter values for junction table
+INSERT INTO movie_genre_junction (movie_id, genre_id)
+VALUES (1, 6),
+(1, 11),
+(2, 2),
+(2, 8),
+(2, 9),
+(2, 10),
+(3, 1),
+(3, 11),
+(3, 13),
+(4, 1),
+(4, 2),
+(4, 4),
+(4, 7),
+(5, 6),
+(6, 8),
+(7, 1),
+(7, 6),
+(8, 1),
+(8, 2),
+(8, 8),
+(9, 1),
+(9, 2),
+(9, 4),
+(9, 8),
+(10, 1),
+(10, 6),
+(10, 7),
+(10, 11),
+(10, 12),
+(11, 1),
+(11, 5),
+(11, 11),
+(11, 13),
+(12, 3),
+(12, 6),
+(13, 5),
+(13, 6),
+(13, 10);
+
