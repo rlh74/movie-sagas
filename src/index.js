@@ -47,6 +47,7 @@ function* addDescription(action){
 function* addGenre(action){
     try {
         yield axios.post('/genres', action.payload);
+        // yield put({type: 'SET_GENRES', payload: response.data})
     } catch (error) {
         console.log('error with addGenre saga', error);
     }

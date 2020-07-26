@@ -15,12 +15,8 @@ class EditMovie extends Component {
 
   saveNewDetails = (event) => {
     event.preventDefault();
-    // console.log('edit descipription textarea:', this.state.newDescription, 'for id:', this.props.reduxState.description);
-    // let payload = {payload: 'bark'};
     this.props.dispatch({type: "ADD_NEW_GENRE", payload: [this.state.newGenre, this.props.reduxState.description]})
-    this.props.dispatch({type: "ADD_MOVIES"})
-    this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description, this.state.newGenre]});
-    // this.props.dispatch({type: "ADD_MOVIES"})
+    this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
     this.props.history.replace('details');
     this.setState({
       newDescription: ''

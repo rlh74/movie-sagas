@@ -8,9 +8,9 @@ class MovieDescription extends Component {
   }
 
   componentDidMount = () => {
-    console.log('movie description component')
-    this.props.dispatch({type: "ADD_MOVIES"})
+    console.log('movie description component:', this.state.genres)
     this.props.dispatch({type: "ADD_GENRES"})
+    this.props.dispatch({type: "ADD_MOVIES"})
     this.matchGenreToMovie();
   }
 
@@ -27,8 +27,8 @@ class MovieDescription extends Component {
       }
     }
     console.log('state is', this.state)
-    
   }
+  
   routeToHome = (event) => {
     event.preventDefault();
     console.log('router OK');
@@ -56,6 +56,13 @@ class MovieDescription extends Component {
             <li key={index}>{item}</li>
           )
         })}
+         {/* {this.props.reduxState.genres.map((item, index)=>{
+          if (item[index].movie.id === this.props.reduxState.description){
+            return (
+              <li key={index}>{item.name}</li>
+            )
+          }
+        })} */}
       </div>
       {/* <p>try this :D {this.props.reduxState.description ? JSON.stringify(this.props.reduxState.movies[this.props.reduxState.description - 1].description) : 'no' }</p> */}
      </>
