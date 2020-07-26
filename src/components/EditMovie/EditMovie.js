@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 class EditMovie extends Component {
 
   state = {
-    newDescription: ''
+    newDescription: '',
+    newGenre: ''
   }
 
   returnToDetails = (event) => {
@@ -14,20 +15,28 @@ class EditMovie extends Component {
 
   saveNewDetails = (event) => {
     event.preventDefault();
-
     // console.log('edit descipription textarea:', this.state.newDescription, 'for id:', this.props.reduxState.description);
     // let payload = {payload: 'bark'};
-    this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
+    this.props.dispatch({type: "ADD_NEW_GENRE", payload: [this.state.newGenre, this.props.reduxState.description]})
     this.props.dispatch({type: "ADD_MOVIES"})
+    this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description, this.state.newGenre]});
+    // this.props.dispatch({type: "ADD_MOVIES"})
     this.props.history.replace('details');
     this.setState({
       newDescription: ''
     })
   }
 
-  handleChange = (event) => {
+  handleGenre = (event) => {
     event.preventDefault();
     console.log('in handleChange', event.target.value)
+    this.setState({
+      newGenre: event.target.value
+    })
+  }
+
+  handleDescription = (event) => {
+    event.preventDefault();
     this.setState({
       newDescription: event.target.value
     })
@@ -39,8 +48,8 @@ class EditMovie extends Component {
       <>
       <button onClick={this.returnToDetails}>Cancel</button><button onClick={this.saveNewDetails}>Save</button>
       <div className="edit-movie">
-      <textarea placeholder="Enter new description" onChange={this.handleChange}></textarea>
-      <textarea placeholder="Enter genre"></textarea>
+      <textarea placeholder="Enter new description" onChange={this.handleDescription}></textarea>
+      <textarea placeholder="Enter genre" onChange={this.handleGenre}></textarea>
       </div>
       </>
     );

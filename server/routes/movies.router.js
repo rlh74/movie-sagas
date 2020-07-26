@@ -29,7 +29,7 @@ router.put('/', (req, res) => {
   .then(response => {
       res.sendStatus(200);
   }).catch( error => {
-      console.log( 'ERROR UPDATING MOVIE -------------->', error );
+      console.log( 'ERROR UPDATING DESCRIPTION -------------->', error );
       res.sendStatus( 500 );
   })
 })

@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('ADD_MOVIES', addMovies);
     yield takeEvery('ADD_NEW_DESCRIPTION', addDescription);
+    yield takeEvery('ADD_NEW_GENRE', addGenre);
     yield takeEvery('ADD_GENRES', getGenres);
 }
 
@@ -35,11 +36,19 @@ function* addMovies(action) {
 
 // update description saga
 function* addDescription(action){
-    yield console.log('add description saga:', action.payload);
     try {
         yield axios.put('/movies', action.payload);
     } catch (error) {
         console.log('error with addDescription reducer', error);
+    }
+}
+
+// update genre saga
+function* addGenre(action){
+    try {
+        yield axios.post('/genres', action.payload);
+    } catch (error) {
+        console.log('error with addGenre saga', error);
     }
 }
 
@@ -57,31 +66,24 @@ function* getGenres(action){
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
-            console.log('case SET_MOVIES:', action.payload)
             return action.payload;
         default:
-            console.log('default case in movies reducer', state)
             return state;
     }
 }
 // used to store description id
 const description = (state = '', action) => {
     if (action.type === 'FETCH_ID'){
-        console.log('satisfied if condition in description reducer with id:', action.payload)
         return action.payload;
     } else {
-        // action.payload = null;
-        console.log('else performed in description reducer', action.payload)
         return state;
     }
 }
-
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
-            // console.log('set genres:', action.payload)
             return action.payload;
         default:
             return state;
