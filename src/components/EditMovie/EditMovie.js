@@ -15,9 +15,21 @@ class EditMovie extends Component {
 
   saveNewDetails = (event) => {
     event.preventDefault();
-    this.props.dispatch({type: "ADD_NEW_GENRE", payload: [this.state.newGenre, this.props.reduxState.description]})
-    this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
-    this.props.history.replace('details');
+    if (this.state.newGenre === '' && this.state.newDescription === ''){
+      alert('no details to add');
+    } else if (this.state.newDescription === ''){
+      this.props.dispatch({type: "ADD_NEW_GENRE", payload: [this.state.newGenre, this.props.reduxState.description]})
+      this.props.history.replace('details');
+    } else if (this.state.newGenre === ''){
+      this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
+      this.props.history.replace('details');
+    } else {
+      this.props.dispatch({type: "ADD_NEW_GENRE", payload: [this.state.newGenre, this.props.reduxState.description]})
+      this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
+      this.props.history.replace('details');
+    }
+    // this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
+    // this.props.history.replace('details');
     this.setState({
       newDescription: ''
     })
