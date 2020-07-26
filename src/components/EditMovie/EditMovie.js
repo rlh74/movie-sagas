@@ -20,6 +20,9 @@ class EditMovie extends Component {
     this.props.dispatch({type: "ADD_NEW_DESCRIPTION", payload: [this.state.newDescription, this.props.reduxState.description]});
     this.props.dispatch({type: "ADD_MOVIES"})
     this.props.history.replace('details');
+    this.setState({
+      newDescription: ''
+    })
   }
 
   handleChange = (event) => {

@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('ADD_MOVIES', addMovies);
     yield takeEvery('ADD_NEW_DESCRIPTION', addDescription);
+    yield takeEvery('ADD_GENRES', getGenres);
 }
 
 // Create sagaMiddleware
@@ -32,6 +33,7 @@ function* addMovies(action) {
     }
 }
 
+// update description saga
 function* addDescription(action){
     yield console.log('add description saga:', action.payload);
     try {
@@ -41,6 +43,15 @@ function* addDescription(action){
     }
 }
 
+// gets table row of movies joined with genres
+function* getGenres(action){
+    try {
+        const response = yield axios.get('/genres');
+        yield put({type: 'SET_GENRES', payload: response.data});
+    } catch (error){
+        console.log('error with genres get requestion', error);
+    }
+}
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
@@ -64,21 +75,13 @@ const description = (state = '', action) => {
         return state;
     }
 }
-// reducer to axios put new description data to database
-// const updateDescription = (state = [], action) => {
-//     if (action.type === 'ADD_NEW_DESCRIPTION'){
-//         console.log('setting description with:', action.payload)
-//         return state;
-//     } else {
-//         console.log('else performed in updateDescription reducer', action.payload)
-//         return state;
-//     }
-// }
+
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
+            // console.log('set genres:', action.payload)
             return action.payload;
         default:
             return state;
@@ -91,7 +94,6 @@ const storeInstance = createStore(
         movies,
         genres,
         description,
-        // updateDescription
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

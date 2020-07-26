@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import MovieItem from '../MovieItem/MovieItem';
 import {connect} from 'react-redux';
 
 class MovieList extends Component {
