@@ -54,10 +54,11 @@ class EditMovie extends Component {
   render() {
     return (
       <>
-      <button onClick={this.returnToDetails}>Cancel</button><button onClick={this.saveNewDetails}>Save</button>
       <div className="edit-movie">
+      <h2>Edit Movie</h2>
       <textarea placeholder="Enter new description" onChange={this.handleDescription}></textarea>
-      <textarea placeholder="Enter genre" onChange={this.handleGenre}></textarea>
+      <textarea placeholder="Enter genre" onChange={this.handleGenre}></textarea><br/>
+      <button onClick={this.returnToDetails}>Cancel</button><button onClick={this.saveNewDetails}>Save</button>
       </div>
       </>
     );
